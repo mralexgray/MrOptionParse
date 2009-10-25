@@ -13,7 +13,7 @@
  *\details Has some very easy-to-use features. For example, it will
  *automatically act on --help, --version, and so on!
  */
-@interface MrOptionParse
+@interface MrOptionParse : NSObject
 {
 @protected
   NSString* banner;/**< The USAGE banner that appears at the
@@ -30,9 +30,9 @@
 -(void)setDefaultsFor: (NSString*)name withValue:(id)value;
 -(void)setVersion: (NSString*)version;
 -(id)getOption: (NSString*)option;
--(void)setBanner: (NSString*)banner;
+-(void)banner: (NSString*)banner;
 -(int)numOptions;
--(NSString*)getUsageMessage;
+-(NSString*)usageMessage;
 -(void)printUsageMessage;
 -(BOOL)optionExists: (NSString*)option;
 -(BOOL)optionIsValid: (NSString*)valid;
