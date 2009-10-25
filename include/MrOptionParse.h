@@ -5,8 +5,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <NSString.h>
-#import <NSDictionary.h>
+
+@class NSString, NSMutableDictionary, MrOption;
 
 /**
  *\brief A friendly way to parse command line options.
@@ -26,10 +26,10 @@
 }
 
 -(id)initWithArgc: (int)argc andArgv:(char*)argv withUsageAutoPrint: (BOOL)autoprint;
--(void)addOption: (NSString*)short longForm: (NSString*)long withAction: (NSString*)action ofType: (NSString*)type withKey: (NSString*)dest isRequired:(BOOL)req usingCallback:(id)cb;
+-(void)addOption: (MrOption*)option withKey: (NSString*)dest;
 -(void)setDefaultsFor: (NSString*)name withValue:(id)value;
 -(void)setVersion: (NSString*)version;
--(id)getOption: (NSString*)option;
+-(id)option: (NSString*)key;
 -(void)banner: (NSString*)banner;
 -(int)numOptions;
 -(NSString*)usageMessage;
