@@ -8,20 +8,25 @@
 
 /**
  *\brief A class that represents options.
+ *
  *\details Asside from storing and providing nice access to options
  *and values, MrOption can also do some nice option checking. It can
- *do a simple check based on type (string, int, float supported) and
- *it can also do more advanced regex checking, which checks a string
- *against a certain regex, useful for verifying urls and other complex
- *input.
+ *do a simple check based on type and it can also do more advanced
+ *regex checking, which checks a string against a certain regex,
+ *useful for verifying urls and other complex input.
  */
 @interface MrOption : NSObject
 {
 @protected
-  NSString* short; /**< Short form of the option, e.g. -f*/
-  NSString* long; /**< Long form of the option, e.g. --fullscreen*/
+  NSString* shortOption; /**< Short form of the option, e.g. -f*/
+  NSString* longOption; /**< Long form of the option, e.g. --fullscreen*/
   NSString* action;  /**< What action should be taken, e.g. store*/
-  NSString* type; /**< Type of option, e.g. string or int*/
+  NSString* type; /**< Type of option, e.g. string or int.
+		   The following types are supported.
+		  -string
+		  -int
+		  -float
+		  -regex*/
   NSString* isRequired; /**< Whether or not the "option" is
 			   required. Kinda funny terminology. Is it
 			   really an option if it isn't optional?*/
@@ -35,12 +40,14 @@
   id value; /**< Current value of the option*/
 }
 
--(id)initWithShort: (NSString*)short longForm: (NSString*)long withAction: (NSString*)action ofType: (NSString*)type isRequired: (BOOL)req usingCallback: (MrCallback*)cb;
+-(id)initWithShortOption: (NSString*)shrt longForm: (NSString*)lng withAction: (NSString*)actn ofType: (NSString*)tp;
+-(id)initWithShortOption: (NSString*)shrt longForm: (NSString*)lng withAction: (NSString*)actn ofType: (NSString*)tp isRequired: (BOOL)req;
+-(id)initWithShortOption: (NSString*)shrt longForm: (NSString*)lng withAction: (NSString*)actn ofType: (NSString*)tp isRequired: (BOOL)req usingCallback: (MrCallback*)cb;
 -(void)explanation: (NSString*)expl andName: (NSString*)moniker;
 -(NSString*)name;
 -(NSString*)explanation;
--(NSString*)short;
--(NSString*)long;
+-(NSString*)shortOption;
+-(NSString*)longOption;
 -(void)defaultValue: (id)val;
 -(id)value;
 -(void)value: (id)val;
